@@ -35,6 +35,8 @@ function obterRestauranteUSP() {
 		$("#restaurante").html(lista[0].nomrtn);
 		$("#telefoneRestaurante").html(telefone);
 		
+		document.write(dddFone);
+		
 	}
 	
 	
