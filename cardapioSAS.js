@@ -35,8 +35,7 @@ function obterRestauranteUSP() {
 		$("#restaurante").html(lista[0].nomrtn);
 		$("#telefoneRestaurante").html(telefone);
 		
-		window.alert(dddFone);
-		window.alert("aeaeofofo");
+
 	}
 		
 		window.alert(dddFone);
@@ -68,6 +67,10 @@ function obterCardapioRestUSP() {
 	var codrtnObter = 9;
 	var cardapioSabado = 0;
 	var cardapioDomingo = 0;
+	
+			window.alert(dddFone);
+		window.alert("aeaeofofo");
+	window.alert( obterCardapioRestUSP(9) );
 	
 	CardapioControleDWR.obterCardapioRestUSP(codrtnObter, function(lista) {
 		
