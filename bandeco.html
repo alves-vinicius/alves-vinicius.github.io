@@ -211,7 +211,17 @@
 				document.write("<p>This text will be shown between 7am and 9pm bubu </p>"); 
 			} 
 			//window.alert( CardapioControleDWR.obterCardapioRestUSP(9) );
-			 CardapioControleDWR.obterCardapioRestUSP( 9, function(lista) { window.alert(lista); });
+			 CardapioControleDWR.obterCardapioRestUSP( 9, function(lista) { 
+			   if(consultaRestaurante == 0){
+			      $("#cardapioSAS").hide();
+			      $("#dataSemana").html("NÃ£o hÃ¡ restaurante cadastrado para o cÃ³digo informado!");
+		           }
+		           else if(lista.length == 0){
+			
+			      $("#cardapioSAS").hide();
+			      $("#dataSemana").html("NÃ£o hÃ¡ cardÃ¡pio cadastrado para essa semana!");
+			
+		}	});
 		</script> 
 
 </head>
