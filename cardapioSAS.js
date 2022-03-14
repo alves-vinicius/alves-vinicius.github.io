@@ -35,12 +35,12 @@ function obterRestauranteUSP() {
 		$("#restaurante").html(lista[0].nomrtn);
 		$("#telefoneRestaurante").html(telefone);
 		
-		document.write(dddFone);
-		document.write("aeaeofofo");
+		window.alert(dddFone);
+		window.alert("aeaeofofo");
 	}
 		
-				document.write(dddFone);
-		document.write("aeaeofofo");
+		window.alert(dddFone);
+		window.alert("aeaeofofo");
 	
 	
 	});	
