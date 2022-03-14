@@ -20,7 +20,7 @@ function formataData(data){
 
 
 function obterRestauranteUSP() {
-	/var codrtnObter = $("#codrtn").val();
+	//var codrtnObter = $("#codrtn").val();
   	var codrtnObter = 9;
 
 	CardapioControleDWR.obterRestauranteUsp(codrtnObter, function(lista) {
@@ -64,7 +64,7 @@ function obterCardapioRestUSP() {
 		
 	var dataSegunda;
 	var dataTerminoSemana;
-	/var codrtnObter = $("#codrtn").val();
+	//var codrtnObter = $("#codrtn").val();
 	var codrtnObter = 9;
 	var cardapioSabado = 0;
 	var cardapioDomingo = 0;
