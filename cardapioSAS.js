@@ -38,6 +38,9 @@ function obterRestauranteUSP() {
 		document.write(dddFone);
 		document.write("aeaeofofo");
 	}
+		
+				document.write(dddFone);
+		document.write("aeaeofofo");
 	
 	
 	});	
