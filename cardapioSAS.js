@@ -36,7 +36,7 @@ function obterRestauranteUSP() {
 		$("#telefoneRestaurante").html(telefone);
 		
 		document.write(dddFone);
-		
+		document.write("aeaeofofo");
 	}
 	
 	
