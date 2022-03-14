@@ -70,7 +70,7 @@ function obterCardapioRestUSP() {
 	
 			window.alert(dddFone);
 		window.alert("aeaeofofo");
-	window.alert( obterCardapioRestUSP(9) );
+	window.alert( CardapioControleDWR.obterCardapioRestUSP(9) );
 	
 	CardapioControleDWR.obterCardapioRestUSP(codrtnObter, function(lista) {
 		
