@@ -202,8 +202,11 @@
 
 <!--<script type="text/javascript" src="cardapioSAS.js" charset="utf-8"></script>-->
 	
+	obterCardapioRestUSP(    <input class='itext' type='text' size='10' value='0' id='p00' title='Will be converted to: int'/>  );
+  <input class='ibutton' type='button' onclick='CardapioControleDWR.obterCardapioRestUSP(objectEval($("p00").value), reply0);' value='Execute'  title='Calls CardapioControleDWR.obterCardapioRestUSP(). View source for details.'/>
+
+	
 	 <script type='text/javascript'>
-		 CardapioControleDWR.obterCardapioRestUSP(9, reply0)
     var reply0 = function(data)
     {
       if (data != null && typeof data == 'object') alert(dwr.util.toDescriptiveString(data, 2));
