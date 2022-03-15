@@ -192,36 +192,33 @@
 
 
 <script type="text/javascript"
-	src="https://uspdigital.usp.br/rucard/dwr/interface/RestauranteControleDWR.js"></script>
+	src="https://uspdigital.usp.br/rucard/dwr/engine.js"></script>
 <script type="text/javascript"
-	src="https://uspdigital.usp.br/rucard/dwr/interface/Rest_cardapioSemanaDWR.js"></script>
+	src="https://uspdigital.usp.br/rucard/dwr/util.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="https://uspdigital.usp.br/rucard/css/cardapioSAS.css">
 	
 	<script type="text/javascript" src="https://uspdigital.usp.br/rucard/dwr/interface/CardapioControleDWR.js"></script>
 
 <!--<script type="text/javascript" src="cardapioSAS.js" charset="utf-8"></script>-->
+	
+	 <script type='text/javascript'>
+		 CardapioControleDWR.obterCardapioRestUSP(9, reply0)
+    var reply0 = function(data)
+    {
+      if (data != null && typeof data == 'object') alert(dwr.util.toDescriptiveString(data, 2));
+      else dwr.util.setValue('d0', dwr.util.toDescriptiveString(data, 1));
+    }
+  </script>
 		<script type="text/javascript"> 
 			var date = new Date(); 
 			var h = date.getHours(); 
 			if (21 <= h || h <= 6) { 
-				document.write("<p>This text will be shown between 9pm and 7am popeye</p>"); 
+				document.write("<p>This text will be shown between 9pm and 7am sexososo</p>"); 
 			} 
 			else { 
-				document.write("<p>This text will be shown between 7am and 9pm bubu </p>"); 
+				document.write("<p>This text will be shown between 7am and 9pm bupaubu </p>"); 
 			} 
-			//window.alert( CardapioControleDWR.obterCardapioRestUSP(9) );
-			 CardapioControleDWR.obterCardapioRestUSP( 9, function(lista) { 
-			   if(consultaRestaurante == 0){
-			      $("#cardapioSAS").hide();
-			      $("#dataSemana").html("NÃ£o hÃ¡ restaurante cadastrado para o cÃ³digo informado!");
-		           }
-		           else if(lista.length == 0){
-			
-			      $("#cardapioSAS").hide();
-			      $("#dataSemana").html("NÃ£o hÃ¡ cardÃ¡pio cadastrado para essa semana!");
-			
-		}	});
 		</script> 
 
 </head>
