@@ -202,7 +202,11 @@
 
 <!--<script type="text/javascript" src="cardapioSAS.js" charset="utf-8"></script>-->
 	
-	obterCardapioRestUSP(    <input class='itext' type='text' size='10' value='0' id='p00' title='Will be converted to: int'/>  );
+
+</head>
+<body>
+	
+		obterCardapioRestUSP(    <input class='itext' type='text' size='10' value='0' id='p00' title='Will be converted to: int'/>  );
   <input class='ibutton' type='button' onclick='CardapioControleDWR.obterCardapioRestUSP(objectEval($("p00").value), reply0);' value='Execute'  title='Calls CardapioControleDWR.obterCardapioRestUSP(). View source for details.'/>
 
 	
@@ -213,6 +217,7 @@
       else dwr.util.setValue('d0', dwr.util.toDescriptiveString(data, 1));
     }
   </script>
+	<span id='d0' class='reply'></span>
 		<script type="text/javascript"> 
 			var date = new Date(); 
 			var h = date.getHours(); 
@@ -224,8 +229,6 @@
 			} 
 		</script> 
 
-</head>
-<body>
 
 	<p class="tituloRestaurante" id="restaurante"></p>
 	<p class="tituloRestaurante"><span id="telefoneRestaurante"></span></p>
