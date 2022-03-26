@@ -99,12 +99,6 @@
 	
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
-
-
-
-
-
 <script type="text/javascript" src="https://uspdigital.usp.br/comumwebdev/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://uspdigital.usp.br/comumwebdev/libs/jquery/plugins/maskedInput/1.3.1/jquery.maskedinput.min.js"></script>
 <script type="text/javascript" src="https://uspdigital.usp.br/comumwebdev/libs/jquery/plugins/validationEngine/2.6.2/jquery.validationEngine-pt.js"></script>
@@ -127,10 +121,6 @@
 <head>
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	
-
-
-
 
 <link type="text/css" rel="stylesheet" href="https://uspdigital.usp.br/rucard/css/rucard.css" >
 <link type="text/css" rel="stylesheet" href="https://uspdigital.usp.br/comumwebdev/libs/usp/home.css"/>
@@ -141,7 +131,6 @@
 <link type="text/css" rel="stylesheet" href="https://uspdigital.usp.br/comumwebdev/libs/jquery/plugins/jqGrid/4.4.4/ui.jqgrid.css"/>
 <link type="text/css" rel="stylesheet" href="https://uspdigital.usp.br/comumwebdev/libs/jquery/plugins/fancybox/1.3.4/jquery.fancybox.css"/>
 </head>
-
 
 <style>
 	a.link_cabecalho:active  {font-family: verdana; font-size: 10px; color: olive; text-decoration: none}
@@ -168,12 +157,6 @@
 	}
 </style>
 
-
-
-
-	
-
-
 <div id="my_web_cabecalho">
 	Card&aacute;pio Semanal
 </div>
@@ -195,15 +178,16 @@
 <body>
 	<script type="text/javascript">
 		let req = new Request("https://uspdigital.usp.br/rucard/dwr/call/plaincall/CardapioControleDWR.obterCardapioRestUSP.dwr?callCount=1&windowName=&nextReverseAjaxIndex=0&c0-scriptName=CardapioControleDWR&c0-methodName=obterCardapioRestUSP&c0-id=0&c0-param0=int:6&batchId=1&instanceId=0&page=%2Frucard%2FJsp%2FcardapioSAS.jsp%3Fcodrtn%3D8&scriptSessionId=qEqk7ItaLEzxe*E*86DiBQhKpZl/hKILpZl-dc3rvbwx5");
-		req.method = "post";
+		req.method = "post";//
+		
 		//use loadJSON because the API answers with JSON
 		let json_doidao = await req.loadString();
-		let json_normal = json_doidao.split('\n').slice(6).join('\n').replace('dwr.engine.remote.handleCallback("1","0",', "").replace("})();", "").trim().replace(");", "")
+		let json_normal = json_doidao.split('\n').slice(6).join('\n').replace('dwr.engine.remote.handleCallback("1","0",', "").replace("})();", "").trim().replace(");", "");
 		let json_melhor = json_normal.replace(/([\[{,])([a-z][a-z0-9]+):/g, "$1\"$2\":");
 		let cardapio = JSON.parse(json_melhor);
 		log(json_doidao);
 		log(JSON.stringify(cardapio, null, 2));
-		document.write( JSON.stringify(cardapio, null, 2));
+		//document.write( JSON.stringify(cardapio, null, 2));
 	</script>
 		<script type="text/javascript"> 
 			var date = new Date(); 
