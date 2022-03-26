@@ -208,43 +208,16 @@
 	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/q@1.5.1/q.js"></script>
 	<script type="text/javascript">
-		import axios from 'axios';
-		alert("1");
-		const axios = require('axios');
-		alert("2");
-		const Q = require("q");
-		alert("3");
-		function fetchMenuFromApi(index) {
-    			let params = `callCount=1\n
-				windowName=\n
-				nextReverseAjaxIndex=0\n
-				c0-scriptName=CardapioControleDWR\n
-				c0-methodName=obterCardapioRestUSP\n
-				c0-id=0\n
-				c0-param0=string:${index}\n
-				batchId=1\n
-				instanceId=0\n
-				page=%2Frucard%2FJsp%2FcardapioSAS.jsp%3Fcodrtn%3D8\n
-				scriptSessionId=qEqk7ItaLEzxe*E*86DiBQhKpZl/hKILpZl-dc3rvbwx5`;
-			alert("4");
-
-			let deferred = Q.defer();
-			alert("5");
-			axios.post('https://uspdigital.usp.br/rucard/dwr/call/plaincall/CardapioControleDWR.obterCardapioRestUSP.dwr', params)
-			.then(response => {
-
-				let json_doidao = response.data;
-				let json_normal = json_doidao.split('\n').slice(6).join('\n').replace('dwr.engine.remote.handleCallback("1","0",', "").replace("})();", "").trim().replace(");", "")
-				let json_melhor = json_normal.replace(/([\[{,])([a-z][a-z0-9]+):/g, "$1\"$2\":");
-				let cardapio = JSON.parse(json_melhor);
-
-				deferred.resolve(cardapio);
-			});
-			alert("6");
-
-			return deferred.promise;
-		}
-		document.write( fetchMenuFromApi(9));
+		let req = new Request("https://uspdigital.usp.br/rucard/dwr/call/plaincall/CardapioControleDWR.obterCardapioRestUSP.dwr?callCount=1&windowName=&nextReverseAjaxIndex=0&c0-scriptName=CardapioControleDWR&c0-methodName=obterCardapioRestUSP&c0-id=0&c0-param0=int:6&batchId=1&instanceId=0&page=%2Frucard%2FJsp%2FcardapioSAS.jsp%3Fcodrtn%3D8&scriptSessionId=qEqk7ItaLEzxe*E*86DiBQhKpZl/hKILpZl-dc3rvbwx5");
+		req.method = "post"
+		//use loadJSON because the API answers with JSON
+		let json_doidao = await req.loadString();
+		let json_normal = json_doidao.split('\n').slice(6).join('\n').replace('dwr.engine.remote.handleCallback("1","0",', "").replace("})();", "").trim().replace(");", "")
+		let json_melhor = json_normal.replace(/([\[{,])([a-z][a-z0-9]+):/g, "$1\"$2\":");
+		let cardapio = JSON.parse(json_melhor);
+		log(json_doidao)
+		log(JSON.stringify(cardapio, null, 2));
+		document.write( cardapio);
 	</script>
 		<script type="text/javascript"> 
 			var date = new Date(); 
