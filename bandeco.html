@@ -1,8 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
-
-
 <html>
 <head>
 <title>Rucard</title>
@@ -184,29 +180,19 @@
 
 	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
-
-
-
-
-
-
-<script type="text/javascript" src="https://uspdigital.usp.br/rucard/dwr/engine.js"></script>
+<!--<script type="text/javascript" src="https://uspdigital.usp.br/rucard/dwr/engine.js"></script>
 <script type="text/javascript" src="https://uspdigital.usp.br/rucard/dwr/util.js"></script>
 <link rel="stylesheet" type="text/css" href="https://uspdigital.usp.br/rucard/css/cardapioSAS.css">
 <script type="text/javascript" src="https://uspdigital.usp.br/rucard/dwr/interface/CardapioControleDWR.js"></script>
-
-<!--<script type="text/javascript" src="cardapioSAS.js" charset="utf-8"></script>-->
-	
 	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/q@1.5.1/q.js"></script>
-	
 
+<script type="text/javascript" src="cardapioSAS.js" charset="utf-8"></script>
+	
+	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/q@1.5.1/q.js"></script>-->
 </head>
 <body>
-	
-	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script type="text/javascript" src="https://unpkg.com/q@1.5.1/q.js"></script>
 	<script type="text/javascript">
 		let req = new Request("https://uspdigital.usp.br/rucard/dwr/call/plaincall/CardapioControleDWR.obterCardapioRestUSP.dwr?callCount=1&windowName=&nextReverseAjaxIndex=0&c0-scriptName=CardapioControleDWR&c0-methodName=obterCardapioRestUSP&c0-id=0&c0-param0=int:6&batchId=1&instanceId=0&page=%2Frucard%2FJsp%2FcardapioSAS.jsp%3Fcodrtn%3D8&scriptSessionId=qEqk7ItaLEzxe*E*86DiBQhKpZl/hKILpZl-dc3rvbwx5");
 		req.method = "post"
@@ -217,7 +203,7 @@
 		let cardapio = JSON.parse(json_melhor);
 		log(json_doidao)
 		log(JSON.stringify(cardapio, null, 2));
-		document.write( cardapio);
+		document.write( JSON.stringify(cardapio, null, 2));
 	</script>
 		<script type="text/javascript"> 
 			var date = new Date(); 
@@ -339,18 +325,9 @@
 	<input type="hidden" id="codrtn" value="9" />
 </body>
 
-
-
-
-
-
-
-
-
 <link type="text/css" rel="stylesheet" href="https://uspdigital.usp.br/comumwebdev/libs/usp/main/1.0/home.css"/>
 <table width="100%" border="0" cellspacing=" 0" cellpadding=" 0" align="center">
-  
-  <tr>
+   <tr>
     <td align="center"><font face="Arial, Helvetica, sans-serif" size="1"><hr size="1">
       <a href='creditos.jsp' class="link_olive" target="_self">Cr&eacute;ditos</a>
       <br>
