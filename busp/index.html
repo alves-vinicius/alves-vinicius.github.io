@@ -1,0 +1,280 @@
+<!-- File: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP Bus Tracker</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1976D2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SP Bus Tracker">
+    <link rel="apple-touch-icon" href="icons/ios-icon-192.png">
+    
+    <!-- Amazon Fire Specific -->
+    <meta name="application-name" content="SP Bus Tracker">
+    <meta name="msapplication-TileColor" content="#1976D2">
+    <meta name="msapplication-TileImage" content="icons/ms-icon-144.png">
+    
+    <!-- Leaflet CSS (for maps) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            max-width: 100%;
+            overflow-x: hidden;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            background-color: #1976D2;
+            color: white;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .header p {
+            font-size: 0.9rem;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .status-info {
+            font-size: 0.85rem;
+        }
+        
+        .status-time {
+            color: #777;
+        }
+        
+        .controls {
+            display: flex;
+            padding: 12px;
+            gap: 8px;
+            background: #fff;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .controls button {
+            background: #f1f1f1;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .controls button:hover {
+            background: #e0e0e0;
+        }
+        
+        .controls button.active {
+            background: #1976D2;
+            color: white;
+        }
+        
+        .delay-indicator {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .delay-indicator .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .delay-indicator .good {
+            background-color: #4CAF50;
+        }
+        
+        .delay-indicator .medium {
+            background-color: #FF9800;
+        }
+        
+        .delay-indicator .poor {
+            background-color: #F44336;
+        }
+        
+        #map {
+            height: 50vh;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        
+        .bus-list {
+            padding: 12px;
+        }
+        
+        .bus-card {
+            background: white;
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-left: 5px solid #ccc;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .bus-route {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        
+        .bus-details {
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .offline-banner {
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            display: none;
+        }
+        
+        /* Route colors */
+        .route-8082 { border-left-color: #e53935; }
+        .route-8083 { border-left-color: #3949ab; }
+        .route-8084 { border-left-color: #43a047; }
+        .route-8085 { border-left-color: #fdd835; }
+        .route-8012 { border-left-color: #8e24aa; }
+        .route-8022 { border-left-color: #fb8c00; }
+        
+        /* Bottom Navigation for Fire Tablets */
+        .fire-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .fire-nav button {
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        
+        .fire-nav button.active {
+            color: #1976D2;
+        }
+        
+        .fire-nav svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+        
+        /* Fire OS specific button tweaks */
+        @media all and (display-mode: fullscreen) {
+            button {
+                min-height: 44px; /* Larger touch targets for Fire OS */
+            }
+            
+            .fire-nav {
+                height: 60px;
+            }
+        }
+        
+        .tab-content {
+            padding-bottom: 70px; /* Space for the fire-nav */
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-banner" id="offline-banner">
+        You are offline. Using cached data.
+    </div>
+
+    <div class="header">
+        <h1>SP Bus Tracker</h1>
+        <p>Live tracking for bus routes</p>
+    </div>
+    
+    <div class="status-bar">
+        <div class="status-info">
+            Buses tracking: <span id="bus-count">0</span>
+        </div>
+        <div class="status-time">
+            Last updated: <span id="last-update">Loading...</span>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button id="refresh-btn"><span id="refresh-loader" class="loader" style="display:none;"></span> Refresh</button>
+        <button id="route-filter" class="active">All Routes</button>
+        <button id="view-toggle">List View</button>
+    </div>
+    
+    <div class="delay-indicator">
+        <div class="indicator" id="delay-indicator"></div>
+        <span id="delay-text">Data delay: Calculating...</span>
+    </div>
+    
+    <div class="tab-content">
+        <div id="map
