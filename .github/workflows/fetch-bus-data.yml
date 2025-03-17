@@ -24,7 +24,7 @@ jobs:
       - name: Fetch bus data
         env:
           API_TOKEN: ${{ secrets.SPTRANS_API_TOKEN }}
-        run: python scripts/fetch_bus_data.py
+        run: python /busp/scripts/fetch_bus_data.py
         
       - name: Commit and push if changes
         run: |
